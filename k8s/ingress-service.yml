@@ -27,24 +27,24 @@ spec:
                 name: server-cluster-ip-service
                 port:
                   number: 5000
-                  
+
     - host: www.noontown.com
-        http:
-          paths:
-            - path: /?(.*)
-              pathType: Prefix
-              backend:
-                service:
-                  name: client-cluster-ip-service
-                  port:
-                    number: 3000
-            - path: /api/?(.*)
-              pathType: Prefix
-              backend:
-                service:
-                  name: server-cluster-ip-service
-                  port:
-                    number: 5000
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: client-cluster-ip-service
+                port:
+                  number: 3000
+          - path: /api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: server-cluster-ip-service
+                port:
+                  number: 5000
   tls:
     - hosts:
       - noontown.com
