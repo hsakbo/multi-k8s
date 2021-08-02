@@ -7,14 +7,13 @@ spec:
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: noontown.com
   dnsNames:
     - noontown.com
-    - www.noontown.com
-  acme:
-    config:
-      - http01:
-          ingressClass: nginx
-        domains:
-          - noontown.com
-          - www.noontown.com
+    - www.noontown.com    
+  # acme: # not in 1.4 or below
+  #   config:
+  #     - http01:
+  #         ingressClass: nginx
+  #       domains:
+  #         - noontown.com
+  #         - www.noontown.com
