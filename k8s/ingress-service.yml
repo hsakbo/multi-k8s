@@ -6,9 +6,12 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
   rules:
-    - http:
+    - host: noontown.com
+      http:
         paths:
           - path: /?(.*)
             pathType: Prefix
@@ -24,3 +27,26 @@ spec:
                 name: server-cluster-ip-service
                 port:
                   number: 5000
+                  
+    - host: www.noontown.com
+        http:
+          paths:
+            - path: /?(.*)
+              pathType: Prefix
+              backend:
+                service:
+                  name: client-cluster-ip-service
+                  port:
+                    number: 3000
+            - path: /api/?(.*)
+              pathType: Prefix
+              backend:
+                service:
+                  name: server-cluster-ip-service
+                  port:
+                    number: 5000
+  tls:
+    - hosts:
+      - noontown.com
+      - www.noontown.com
+      secretName: noontown-com

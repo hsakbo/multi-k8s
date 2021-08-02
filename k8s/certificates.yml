@@ -9,7 +9,9 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - noontown.com
-    - www.noontown.com    
+    - www.noontown.com
+  privateKey:
+    rotationPolicy: Always
   # acme: # not in 1.4 or below
   #   config:
   #     - http01:
